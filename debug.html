@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>HUD Debug</title>
+  <style>
+    html, body { margin: 0; background: #000; }
+    iframe { width: 1280px; height: 900px; border: 0; position: fixed; left: 0; top: 0; }
+    #out { position: fixed; left: 0; top: 0; z-index: 5; background: #000; color: #0f0; font: 12px monospace; white-space: pre; }
+  </style>
+</head>
+<body>
+  <iframe id="frame" src="index.html"></iframe>
+  <pre id="out">loading</pre>
+  <script>
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    async function waitFor(fn, timeout = 30000) {
+      const start = Date.now();
+      while (Date.now() - start < timeout) {
+        try { if (fn()) return true; } catch (e) {}
+        await sleep(60);
+      }
+      return false;
+    }
+    const frame = document.getElementById('frame');
+    frame.addEventListener('load', async () => {
+      const w = frame.contentWindow;
+      const d = frame.contentDocument;
+      const input = d.getElementById('command-input');
+      const mode = d.getElementById('status-mode');
+      await waitFor(() => mode.textContent === 'READY');
+      input.value = 'projects';
+      input.dispatchEvent(new w.Event('input', { bubbles: true }));
+      input.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+      await sleep(80);
+      if (mode.textContent !== 'READY') input.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+      await waitFor(() => mode.textContent === 'READY');
+      await sleep(800);
+
+      const img = d.querySelector('.hud-media img');
+      const frameEl = d.querySelector('.hud-media');
+      const after = w.getComputedStyle(frameEl, '::after');
+      const data = {
+        naturalWidth: img.naturalWidth,
+        naturalHeight: img.naturalHeight,
+        src: img.currentSrc,
+        imgRect: img.getBoundingClientRect().toJSON(),
+        frameRect: frameEl.getBoundingClientRect().toJSON(),
+        imgDisplay: w.getComputedStyle(img).display,
+        imgVisibility: w.getComputedStyle(img).visibility,
+        imgOpacity: w.getComputedStyle(img).opacity,
+        imgFilter: w.getComputedStyle(img).filter,
+        imgPosition: w.getComputedStyle(img).position,
+        imgZ: w.getComputedStyle(img).zIndex,
+        afterBg: after.backgroundImage,
+        afterZ: after.zIndex,
+        afterOpacity: after.opacity,
+        frameOverflow: w.getComputedStyle(frameEl).overflow,
+        fallbackOpacity: w.getComputedStyle(d.querySelector('.media-fallback')).opacity,
+        fallbackVisibility: w.getComputedStyle(d.querySelector('.media-fallback')).visibility,
+        scrollTop: d.getElementById('terminal-scroll').scrollTop
+      };
+      document.getElementById('out').textContent = JSON.stringify(data, null, 2);
+      document.title = 'DEBUG DONE';
+    });
+  </script>
+</body>
+</html>

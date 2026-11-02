@@ -149,6 +149,68 @@
     </footer>
   </main>
 
+  <div class="project-modal" id="project-modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-project-close aria-hidden="true"></div>
+    <div
+      class="modal-frame"
+      id="project-modal-frame"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+      aria-describedby="project-modal-summary"
+    >
+      <span class="m-corner m-tl" aria-hidden="true"></span>
+      <span class="m-corner m-tr" aria-hidden="true"></span>
+      <span class="m-corner m-bl" aria-hidden="true"></span>
+      <span class="m-corner m-br" aria-hidden="true"></span>
+      <div class="modal-scan" aria-hidden="true"></div>
+
+      <header class="modal-head">
+        <div class="modal-path">
+          <span class="modal-led" aria-hidden="true"></span>
+          <span class="dim">/projects/</span><span id="modal-slug">first</span>
+        </div>
+        <div class="modal-head-meta">
+          <span class="modal-chip">MÓDULO <span id="modal-index">01</span></span>
+          <span class="modal-coord" id="modal-coord">01 / 03</span>
+          <button class="modal-close" id="project-modal-close" type="button" aria-label="Cerrar ficha del proyecto">[ CERRAR × ]</button>
+        </div>
+      </header>
+
+      <div class="modal-body" id="modal-body">
+        <div class="modal-media-col">
+          <div class="modal-media-slot" id="project-modal-media" tabindex="-1"></div>
+          <div class="media-meta">
+            <span class="media-meta-label">ASSET</span>
+            <span id="modal-media-path">assets/img/first-robot.jpg</span>
+            <span class="media-status" id="modal-media-status">● SIGNAL OK</span>
+          </div>
+          <p class="media-note">Para cambiar la imagen, reemplazá el archivo en <span class="hl">assets/img/</span> o editá <span class="hl">CONFIG.images</span>.</p>
+        </div>
+
+        <div class="modal-info-col">
+          <div class="eyebrow" id="modal-kicker"></div>
+          <h2 class="modal-title" id="project-modal-title"></h2>
+          <p class="modal-sub" id="modal-subtitle"></p>
+          <p class="modal-summary" id="project-modal-summary"></p>
+          <div class="hud-badges modal-badges" id="modal-badges"></div>
+          <div class="modal-section-label">TELEMETRÍA / DATOS CLAVE</div>
+          <div class="kv-grid modal-specs" id="modal-specs"></div>
+          <div class="modal-section-label">REGISTRO / APRENDIZAJES</div>
+          <ul class="bullets" id="modal-bullets"></ul>
+        </div>
+      </div>
+
+      <footer class="modal-foot">
+        <div class="modal-actions" id="modal-actions"></div>
+        <div class="modal-nav">
+          <button type="button" class="modal-nav-btn" data-project-nav="-1" aria-label="Proyecto anterior">[ ← ANTERIOR ]</button>
+          <button type="button" class="modal-nav-btn" data-project-nav="1" aria-label="Proyecto siguiente">[ SIGUIENTE → ]</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
   <canvas id="matrix-canvas" aria-hidden="true"></canvas>
   <div class="matrix-veil" id="matrix-veil" aria-hidden="true">
     <span>[ MATRIX ] · PULSA CUALQUIER TECLA PARA SALIR</span>
