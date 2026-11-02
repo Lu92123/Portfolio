@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="amber">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LU92123 // VT-100 Terminal</title>
+  <meta name="description" content="Portafolio interactivo de Lucas (LU92123): robótica FIRST, sistemas embebidos, programación de bajo nivel y speedcubing. Una terminal retro estilo VT-100." />
+  <meta name="theme-color" content="#120c00" />
+  <meta name="color-scheme" content="dark" />
+
+  <meta property="og:title" content="LU92123 // VT-100 Terminal" />
+  <meta property="og:description" content="Portafolio interactivo en una terminal retro de fósforo ámbar. Escribe help para empezar." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lu92123.github.io/Portfolio/" />
+  <link rel="canonical" href="https://lu92123.github.io/Portfolio/" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23120c00'/%3E%3Ctext x='4' y='23' font-family='monospace' font-size='17' font-weight='bold' fill='%23ffb000'%3E%26gt;_%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap" rel="stylesheet" />
+
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('vt-theme');
+        if (theme === 'amber' || theme === 'green' || theme === 'mono') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+        if (localStorage.getItem('vt-crt') === 'off') {
+          document.documentElement.classList.add('crt-off');
+        }
+      } catch (e) { /* storage bloqueado: se usan los valores por defecto */ }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <noscript>
+    <div class="noscript">
+      <strong>TERMINAL SIN JAVASCRIPT</strong>
+      <p>Esta terminal necesita JavaScript para responder a los comandos. Actívalo y recarga la página.</p>
+      <p>Mientras tanto puedes visitar el perfil de GitHub: <a href="https://github.com/Lu92123">github.com/Lu92123</a>.</p>
+    </div>
+  </noscript>
+
+  <main class="monitor" aria-label="Terminal retro VT-100 del portafolio">
+    <header class="monitor-top">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">▚</span>
+        <span class="brand-name">VT<span class="brand-dash">-</span>100</span>
+        <span class="brand-sep" aria-hidden="true">/</span>
+        <span class="brand-sub">LU92123</span>
+      </div>
+
+      <div class="monitor-meta">
+        <span class="clock" id="clock" aria-label="Hora local">--:--:--</span>
+        <span class="leds" aria-hidden="true">
+          <span class="led led-pwr"></span> PWR
+          <span class="led led-rx" id="rx-led"></span> RX
+        </span>
+        <button
+          type="button"
+          class="crt-toggle"
+          id="crt-toggle"
+          aria-pressed="true"
+          title="Activar o desactivar el efecto CRT (comando: crt)"
+        >[ CRT: ON ]</button>
+      </div>
+    </header>
+
+    <div class="bezel">
+      <div class="screen" id="screen">
+        <div class="screen-top" aria-hidden="true">
+          <span class="screen-online"><span class="dot"></span> ONLINE</span>
+          <span>TTY0 · 80×24</span>
+          <span>9600 8N1</span>
+          <span class="screen-tx" id="tx-status">TX IDLE</span>
+        </div>
+
+        <nav class="quickbar" aria-label="Comandos rápidos">
+          <span class="quickbar-label" aria-hidden="true">CMD</span>
+          <button type="button" data-cmd="help" title="Lista de comandos">help</button>
+          <button type="button" data-cmd="about" title="Perfil del operador">about</button>
+          <button type="button" data-cmd="projects" title="Índice de proyectos">projects</button>
+          <button type="button" data-cmd="cubing" title="Speedcubing">cubing</button>
+          <button type="button" data-cmd="theme" title="Cambiar fósforo">theme</button>
+          <button type="button" data-cmd="matrix" title="Lluvia digital">matrix</button>
+          <button type="button" data-cmd="crt" title="Activar o desactivar el efecto CRT">crt</button>
+          <button type="button" data-cmd="clear" title="Limpiar pantalla">clear</button>
+          <span class="quickbar-spacer"></span>
+          <span class="quickbar-hint" aria-hidden="true">TAB auto · ↑↓ hist</span>
+        </nav>
+
+        <section class="terminal" id="terminal" aria-label="Terminal interactiva">
+          <div class="terminal-scroll" id="terminal-scroll">
+            <div class="output" id="output" role="log" aria-live="polite" aria-relevant="additions text"></div>
+          </div>
+
+          <form class="prompt-line" id="prompt-form" autocomplete="off">
+            <label class="ps1" for="command-input">guest@system:~$</label>
+            <div class="input-shell">
+              <span class="mirror" id="mirror" aria-hidden="true"></span>
+              <span class="caret" id="caret" aria-hidden="true"></span>
+              <input
+                id="command-input"
+                name="command"
+                type="text"
+                maxlength="120"
+                spellcheck="false"
+                autocapitalize="off"
+                autocorrect="off"
+                autocomplete="off"
+                enterkeyhint="go"
+                aria-label="Escribe un comando y pulsa Enter"
+                aria-describedby="prompt-help"
+                placeholder="help"
+              />
+            </div>
+            <span class="prompt-hint" id="prompt-hint" aria-hidden="true">[enter] run</span>
+            <span id="prompt-help" class="sr-only">Escribe help para ver los comandos. Usa las flechas arriba y abajo para el historial y Tab para autocompletar.</span>
+          </form>
+        </section>
+
+        <div class="screen-bottom" aria-hidden="true">
+          <span class="mode" id="status-mode">BOOTING</span>
+          <span class="bottom-hint">↑↓ historial · TAB autocompletar · ENTER ejecutar</span>
+          <span class="phosphor" id="phosphor-label">P1 · AMBER</span>
+        </div>
+
+        <div class="crt-effects" aria-hidden="true">
+          <div class="scanlines"></div>
+          <div class="scanbar"></div>
+          <div class="flicker"></div>
+          <div class="grain"></div>
+          <div class="vignette"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="monitor-bottom">
+      <span>DEC VT100 · PHOSPHOR TERMINAL</span>
+      <span class="vents" aria-hidden="true"></span>
+      <span>© <span id="year">2026</span> LUCAS</span>
+    </footer>
+  </main>
+
+  <canvas id="matrix-canvas" aria-hidden="true"></canvas>
+  <div class="matrix-veil" id="matrix-veil" aria-hidden="true">
+    <span>[ MATRIX ] · PULSA CUALQUIER TECLA PARA SALIR</span>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
