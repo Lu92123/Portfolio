@@ -1,0 +1,12 @@
+# Fotos originales de cámara: solo se versionan las imágenes optimizadas.
+# Guardá acá los JPEG/HEIC/MOV originales; el sitio usa los .jpg de assets/img/.
+assets/img/First/
+assets/img/Probot-Fútbol/
+assets/img/cubing/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LU92123 // VT-100 Terminal</title>
-  <meta name="description" content="Portafolio interactivo de Lucas (LU92123): robótica FIRST, sistemas embebidos, programación de bajo nivel y speedcubing. Una terminal retro estilo VT-100." />
+  <title>Lucas · LU92123 — Robótica, sistemas embebidos y speedcubing</title>
+  <meta name="description" content="Portafolio de Lucas (LU92123): robótica FIRST FTC/FRC, robots de competición Probot School, sistemas embebidos, C/C++, ESP32 y speedcubing. Una terminal retro VT-100 que abre paso a un portafolio visual." />
   <meta name="theme-color" content="#120c00" />
   <meta name="color-scheme" content="dark" />
 
-  <meta property="og:title" content="LU92123 // VT-100 Terminal" />
-  <meta property="og:description" content="Portafolio interactivo en una terminal retro de fósforo ámbar. Escribe help para empezar." />
+  <meta property="og:title" content="Lucas · LU92123 — Portafolio" />
+  <meta property="og:description" content="Robótica de competición, sistemas embebidos y speedcubing. Entrá por la terminal, explorá el portafolio visual." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lu92123.github.io/Portfolio/" />
-  <link rel="canonical" href="https://lu92123.github.io/Portfolio/" />
+  <meta property="og:url" content="https://lucastrad.me/" />
+  <meta property="og:image" content="https://lucastrad.me/assets/img/first-robot.jpg" />
+  <meta property="og:image:alt" content="Robot de competición FIRST en la cancha" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://lucastrad.me/" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23120c00'/%3E%3Ctext x='4' y='23' font-family='monospace' font-size='17' font-weight='bold' fill='%23ffb000'%3E%26gt;_%3C/text%3E%3C/svg%3E" />
 
@@ -22,6 +25,7 @@
 
   <script>
     (function () {
+      document.documentElement.classList.add('js');
       try {
         var theme = localStorage.getItem('vt-theme');
         if (theme === 'amber' || theme === 'green' || theme === 'mono') {
@@ -40,176 +44,373 @@
 <body>
   <div class="page-glow" aria-hidden="true"></div>
 
+  <a class="skip-link" href="#portfolio">Saltar a la vista del portafolio</a>
+
   <noscript>
     <div class="noscript">
       <strong>TERMINAL SIN JAVASCRIPT</strong>
-      <p>Esta terminal necesita JavaScript para responder a los comandos. Actívalo y recarga la página.</p>
-      <p>Mientras tanto puedes visitar el perfil de GitHub: <a href="https://github.com/Lu92123">github.com/Lu92123</a>.</p>
+      <p>La terminal interactiva necesita JavaScript. Abajo igual podés recorrer el portafolio visual, las imágenes y los enlaces.</p>
+      <p>Perfil de GitHub: <a href="https://github.com/Lu92123">github.com/Lu92123</a>.</p>
     </div>
   </noscript>
 
-  <main class="monitor" aria-label="Terminal retro VT-100 del portafolio">
-    <header class="monitor-top">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">▚</span>
-        <span class="brand-name">VT<span class="brand-dash">-</span>100</span>
-        <span class="brand-sep" aria-hidden="true">/</span>
-        <span class="brand-sub">LU92123</span>
-      </div>
-
-      <div class="monitor-meta">
-        <span class="clock" id="clock" aria-label="Hora local">--:--:--</span>
-        <span class="leds" aria-hidden="true">
-          <span class="led led-pwr"></span> PWR
-          <span class="led led-rx" id="rx-led"></span> RX
-        </span>
-        <button
-          type="button"
-          class="crt-toggle"
-          id="crt-toggle"
-          aria-pressed="true"
-          title="Activar o desactivar el efecto CRT (comando: crt)"
-        >[ CRT: ON ]</button>
-      </div>
-    </header>
-
-    <div class="bezel">
-      <div class="screen" id="screen">
-        <div class="screen-top" aria-hidden="true">
-          <span class="screen-online"><span class="dot"></span> ONLINE</span>
-          <span>TTY0 · 80×24</span>
-          <span>9600 8N1</span>
-          <span class="screen-tx" id="tx-status">TX IDLE</span>
+  <!-- ============================================================
+       CAPA 1 · HERO · TERMINAL CRT
+       ============================================================ -->
+  <section class="terminal-hero" id="terminal-hero" aria-label="Terminal retro VT-100">
+    <div class="monitor" aria-label="Monitor DEC VT-100">
+      <header class="monitor-top">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">▚</span>
+          <span class="brand-name">VT<span class="brand-dash">-</span>100</span>
+          <span class="brand-sep" aria-hidden="true">/</span>
+          <span class="brand-sub">LU92123</span>
         </div>
 
-        <nav class="quickbar" aria-label="Comandos rápidos">
-          <span class="quickbar-label" aria-hidden="true">CMD</span>
-          <button type="button" data-cmd="help" title="Lista de comandos">help</button>
-          <button type="button" data-cmd="about" title="Perfil del operador">about</button>
-          <button type="button" data-cmd="projects" title="Índice de proyectos">projects</button>
-          <button type="button" data-cmd="cubing" title="Speedcubing">cubing</button>
-          <button type="button" data-cmd="theme" title="Cambiar fósforo">theme</button>
-          <button type="button" data-cmd="matrix" title="Lluvia digital">matrix</button>
-          <button type="button" data-cmd="crt" title="Activar o desactivar el efecto CRT">crt</button>
-          <button type="button" data-cmd="clear" title="Limpiar pantalla">clear</button>
-          <span class="quickbar-spacer"></span>
-          <span class="quickbar-hint" aria-hidden="true">TAB auto · ↑↓ hist</span>
-        </nav>
-
-        <section class="terminal" id="terminal" aria-label="Terminal interactiva">
-          <div class="terminal-scroll" id="terminal-scroll">
-            <div class="output" id="output" role="log" aria-live="polite" aria-relevant="additions text"></div>
-          </div>
-
-          <form class="prompt-line" id="prompt-form" autocomplete="off">
-            <label class="ps1" for="command-input">guest@system:~$</label>
-            <div class="input-shell">
-              <span class="mirror" id="mirror" aria-hidden="true"></span>
-              <span class="caret" id="caret" aria-hidden="true"></span>
-              <input
-                id="command-input"
-                name="command"
-                type="text"
-                maxlength="120"
-                spellcheck="false"
-                autocapitalize="off"
-                autocorrect="off"
-                autocomplete="off"
-                enterkeyhint="go"
-                aria-label="Escribe un comando y pulsa Enter"
-                aria-describedby="prompt-help"
-                placeholder="help"
-              />
-            </div>
-            <span class="prompt-hint" id="prompt-hint" aria-hidden="true">[enter] run</span>
-            <span id="prompt-help" class="sr-only">Escribe help para ver los comandos. Usa las flechas arriba y abajo para el historial y Tab para autocompletar.</span>
-          </form>
-        </section>
-
-        <div class="screen-bottom" aria-hidden="true">
-          <span class="mode" id="status-mode">BOOTING</span>
-          <span class="bottom-hint">↑↓ historial · TAB autocompletar · ENTER ejecutar</span>
-          <span class="phosphor" id="phosphor-label">P1 · AMBER</span>
-        </div>
-
-        <div class="crt-effects" aria-hidden="true">
-          <div class="scanlines"></div>
-          <div class="scanbar"></div>
-          <div class="flicker"></div>
-          <div class="grain"></div>
-          <div class="vignette"></div>
-        </div>
-      </div>
-    </div>
-
-    <footer class="monitor-bottom">
-      <span>DEC VT100 · PHOSPHOR TERMINAL</span>
-      <span class="vents" aria-hidden="true"></span>
-      <span>© <span id="year">2026</span> LUCAS</span>
-    </footer>
-  </main>
-
-  <div class="project-modal" id="project-modal" hidden aria-hidden="true">
-    <div class="modal-backdrop" data-project-close aria-hidden="true"></div>
-    <div
-      class="modal-frame"
-      id="project-modal-frame"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="project-modal-title"
-      aria-describedby="project-modal-summary"
-    >
-      <span class="m-corner m-tl" aria-hidden="true"></span>
-      <span class="m-corner m-tr" aria-hidden="true"></span>
-      <span class="m-corner m-bl" aria-hidden="true"></span>
-      <span class="m-corner m-br" aria-hidden="true"></span>
-      <div class="modal-scan" aria-hidden="true"></div>
-
-      <header class="modal-head">
-        <div class="modal-path">
-          <span class="modal-led" aria-hidden="true"></span>
-          <span class="dim">/projects/</span><span id="modal-slug">first</span>
-        </div>
-        <div class="modal-head-meta">
-          <span class="modal-chip">MÓDULO <span id="modal-index">01</span></span>
-          <span class="modal-coord" id="modal-coord">01 / 03</span>
-          <button class="modal-close" id="project-modal-close" type="button" aria-label="Cerrar ficha del proyecto">[ CERRAR × ]</button>
+        <div class="monitor-meta">
+          <span class="clock" id="clock" aria-label="Hora local">--:--:--</span>
+          <span class="leds" aria-hidden="true">
+            <span class="led led-pwr"></span> PWR
+            <span class="led led-rx" id="rx-led"></span> RX
+          </span>
+          <button
+            type="button"
+            class="crt-toggle"
+            id="crt-toggle"
+            aria-pressed="true"
+            title="Activar o desactivar el efecto CRT (comando: crt)"
+          >[ CRT: ON ]</button>
         </div>
       </header>
 
-      <div class="modal-body" id="modal-body">
-        <div class="modal-media-col">
-          <div class="modal-media-slot" id="project-modal-media" tabindex="-1"></div>
-          <div class="media-meta">
-            <span class="media-meta-label">ASSET</span>
-            <span id="modal-media-path">assets/img/first-robot.jpg</span>
-            <span class="media-status" id="modal-media-status">● SIGNAL OK</span>
+      <div class="bezel">
+        <div class="screen" id="screen">
+          <div class="screen-top" aria-hidden="true">
+            <span class="screen-online"><span class="dot"></span> ONLINE</span>
+            <span>TTY0 · 80×24</span>
+            <span>9600 8N1</span>
+            <span class="screen-tx" id="tx-status">TX IDLE</span>
           </div>
-          <p class="media-note">Para cambiar la imagen, reemplazá el archivo en <span class="hl">assets/img/</span> o editá <span class="hl">CONFIG.images</span>.</p>
-        </div>
 
-        <div class="modal-info-col">
-          <div class="eyebrow" id="modal-kicker"></div>
-          <h2 class="modal-title" id="project-modal-title"></h2>
-          <p class="modal-sub" id="modal-subtitle"></p>
-          <p class="modal-summary" id="project-modal-summary"></p>
-          <div class="hud-badges modal-badges" id="modal-badges"></div>
-          <div class="modal-section-label">TELEMETRÍA / DATOS CLAVE</div>
-          <div class="kv-grid modal-specs" id="modal-specs"></div>
-          <div class="modal-section-label">REGISTRO / APRENDIZAJES</div>
-          <ul class="bullets" id="modal-bullets"></ul>
+          <nav class="quickbar" aria-label="Comandos rápidos">
+            <span class="quickbar-label" aria-hidden="true">CMD</span>
+            <button type="button" data-cmd="help" title="Lista de comandos">help</button>
+            <button type="button" data-cmd="about" title="Perfil del operador">about</button>
+            <button type="button" data-cmd="projects" title="Índice de proyectos">projects</button>
+            <button type="button" data-cmd="cubing" title="Speedcubing">cubing</button>
+            <button type="button" data-cmd="explore" title="Ir al portafolio visual">explore</button>
+            <button type="button" data-cmd="theme" title="Cambiar fósforo">theme</button>
+            <button type="button" data-cmd="matrix" title="Lluvia digital">matrix</button>
+            <button type="button" data-cmd="crt" title="Activar o desactivar el efecto CRT">crt</button>
+            <button type="button" data-cmd="clear" title="Limpiar pantalla">clear</button>
+            <span class="quickbar-spacer"></span>
+            <span class="quickbar-hint" aria-hidden="true">TAB auto · ↑↓ hist</span>
+          </nav>
+
+          <section class="terminal" id="terminal" aria-label="Terminal interactiva">
+            <div class="terminal-scroll" id="terminal-scroll">
+              <div class="output" id="output" role="log" aria-live="polite" aria-relevant="additions text"></div>
+            </div>
+
+            <form class="prompt-line" id="prompt-form" autocomplete="off">
+              <label class="ps1" for="command-input">guest@system:~$</label>
+              <div class="input-shell">
+                <span class="mirror" id="mirror" aria-hidden="true"></span>
+                <span class="caret" id="caret" aria-hidden="true"></span>
+                <input
+                  id="command-input"
+                  name="command"
+                  type="text"
+                  maxlength="120"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  autocorrect="off"
+                  autocomplete="off"
+                  enterkeyhint="go"
+                  aria-label="Escribe un comando y pulsa Enter"
+                  aria-describedby="prompt-help"
+                  placeholder="help"
+                />
+              </div>
+              <span class="prompt-hint" id="prompt-hint" aria-hidden="true">[enter] run</span>
+              <span id="prompt-help" class="sr-only">Escribe help para ver los comandos. Usa las flechas arriba y abajo para el historial y Tab para autocompletar.</span>
+            </form>
+          </section>
+
+          <div class="screen-bottom" aria-hidden="true">
+            <span class="mode" id="status-mode">BOOTING</span>
+            <span class="bottom-hint">↑↓ historial · TAB autocompletar · ENTER ejecutar</span>
+            <span class="phosphor" id="phosphor-label">P1 · AMBER</span>
+          </div>
+
+          <div class="crt-effects" aria-hidden="true">
+            <div class="scanlines"></div>
+            <div class="scanbar"></div>
+            <div class="flicker"></div>
+            <div class="grain"></div>
+            <div class="vignette"></div>
+          </div>
         </div>
       </div>
 
-      <footer class="modal-foot">
-        <div class="modal-actions" id="modal-actions"></div>
-        <div class="modal-nav">
-          <button type="button" class="modal-nav-btn" data-project-nav="-1" aria-label="Proyecto anterior">[ ← ANTERIOR ]</button>
-          <button type="button" class="modal-nav-btn" data-project-nav="1" aria-label="Proyecto siguiente">[ SIGUIENTE → ]</button>
-        </div>
+      <footer class="monitor-bottom">
+        <span>DEC VT100 · PHOSPHOR TERMINAL</span>
+        <span class="vents" aria-hidden="true"></span>
+        <span>© <span id="year">2026</span> LUCAS</span>
       </footer>
     </div>
-  </div>
+
+    <a class="scroll-cue" href="#portfolio" data-scroll-to="portfolio">
+      <span class="scroll-cue-text">[ Scroll o escribe <span class="hl">explore</span> para ver el portafolio visual ]</span>
+      <span class="scroll-cue-arrow" aria-hidden="true">↓</span>
+    </a>
+  </section>
+
+  <!-- ============================================================
+       CAPA 2 · PORTAFOLIO VISUAL
+       ============================================================ -->
+  <main class="portfolio" id="portfolio">
+    <header class="site-nav" aria-label="Navegación del portafolio">
+      <a class="site-brand" href="#terminal-hero" data-scroll-to="terminal-hero" aria-label="Volver a la terminal">
+        <span class="site-brand-mark" aria-hidden="true">▚</span>
+        <span class="site-brand-name">LU92123</span>
+        <span class="site-brand-sub">/ PORTAFOLIO</span>
+      </a>
+
+      <nav class="site-links" aria-label="Secciones">
+        <a href="#about" data-scroll-to="about">Perfil</a>
+        <a href="#projects" data-scroll-to="projects">Proyectos</a>
+        <a href="#cubing" data-scroll-to="cubing">Cubing</a>
+        <a href="#contact" data-scroll-to="contact">Contacto</a>
+      </nav>
+
+      <a class="site-terminal-btn" href="#terminal-hero" data-scroll-to="terminal-hero">[ TERMINAL ↑ ]</a>
+    </header>
+
+    <!-- 01 · Perfil -->
+    <section class="section section-about" id="about" aria-labelledby="about-title">
+      <div class="section-head reveal">
+        <span class="section-index" aria-hidden="true">01</span>
+        <span class="section-kicker">PERFIL / ENGINEERING</span>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <h2 id="about-title">Ingeniería que toca<br /><em>el mundo físico.</em></h2>
+          <p class="about-lead">Me muevo donde el software se encuentra con el hardware: robótica de competición, sistemas embebidos y programación de bajo nivel.</p>
+          <p>Mi formación práctica viene de competir. Más de tres temporadas en <strong>FIRST (FTC y FRC)</strong> y robots de fútbol, mini sumo y sigue-líneas en <strong>Probot School / Liga Nacional</strong>. Ahí una idea solo vale cuando el robot funciona en la cancha: medir, iterar y diagnosticar con el reloj en contra.</p>
+          <p>Me interesa lo que ocurre <em>debajo</em> de la abstracción: cómo responde un microcontrolador, por qué falla un driver, cuánto tarda una rutina y qué pasa cuando el hardware no perdona. Entender el sistema completo antes que memorizar la receta.</p>
+
+          <div class="about-actions">
+            <a class="btn btn-primary" href="#projects" data-scroll-to="projects">Ver proyectos <span aria-hidden="true">→</span></a>
+            <a class="btn" href="https://github.com/Lu92123" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <aside class="about-panel reveal" aria-label="Ficha técnica">
+          <div class="panel-label">FICHA TÉCNICA / 2026</div>
+          <dl class="spec-list">
+            <div>
+              <dt>Enfoque</dt>
+              <dd>Sistemas embebidos · robótica · software de bajo nivel</dd>
+            </div>
+            <div>
+              <dt>Herramientas</dt>
+              <dd>C/C++ · Python · Java · JavaScript · Git · CAD</dd>
+            </div>
+            <div>
+              <dt>Hardware</dt>
+              <dd>AVR · ESP32 · drivers de motor · sensores IR/US</dd>
+            </div>
+            <div>
+              <dt>Método</dt>
+              <dd>Entender → medir → construir → iterar</dd>
+            </div>
+          </dl>
+          <div class="about-chips" aria-label="Tecnologías">
+            <span>C++</span><span>ESP32</span><span>Arduino</span><span>AVR</span><span>CAD</span><span>PID</span><span>Git</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="about-stats reveal">
+        <div class="stat-block">
+          <span class="stat-number">3+</span>
+          <span class="stat-caption">temporadas FIRST<br />FTC · FRC</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-number">3</span>
+          <span class="stat-caption">categorías de robots<br />fútbol · sumo · línea</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-number">~30s</span>
+          <span class="stat-caption">promedio speedcubing<br />3×3</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · Proyectos -->
+    <section class="section section-projects" id="projects" aria-labelledby="projects-title">
+      <div class="section-head reveal">
+        <span class="section-index" aria-hidden="true">02</span>
+        <span class="section-kicker">TRABAJO / ROBÓTICA</span>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="section-intro reveal">
+        <h2 id="projects-title">Robots que compiten.<br /><em>Sistemas que resisten.</em></h2>
+        <p>Dos frentes: la competencia internacional de FIRST y la pista local de Probot School. Mecánica, electrónica, firmware y estrategia en el mismo ciclo.</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="portfolio-card reveal" id="project-first" data-project-card="first">
+          <div class="card-media">
+            <img src="assets/img/first-robot.jpg" alt="Robot de competición FIRST FTC/FRC en el pit" width="1280" height="720" loading="lazy" decoding="async" />
+            <span class="card-media-tag">01 / INTERNACIONAL</span>
+            <span class="card-media-code" aria-hidden="true">FTC · FRC</span>
+          </div>
+          <div class="card-body">
+            <div class="card-kicker">FIRST · FTC / FRC</div>
+            <h3>Robótica de competición internacional</h3>
+            <p class="card-subtitle">Mecánica · autonomía · pit crew</p>
+            <p>Tres temporadas diseñando, fabricando y programando robots para FTC y FRC. Chasis, intakes, elevadores, control autónomo con sensores y reparaciones de pit con el reloj en contra.</p>
+            <div class="badges" aria-label="Tecnologías">
+              <span>C++</span><span>Java</span><span>CAD</span><span>PID</span><span>Sensores</span><span>Telemetría</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://github.com/Lu92123" target="_blank" rel="noopener noreferrer" data-link="firstGithub">Ver código <span aria-hidden="true">↗</span></a>
+              <a class="btn" href="assets/img/first-robot.jpg" target="_blank" rel="noopener noreferrer">Ver foto <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card reveal" id="project-probot" data-project-card="probot">
+          <div class="card-media">
+            <img src="assets/img/probot-robot.jpg" alt="Robot de Probot School en pista de competición" width="1280" height="720" loading="lazy" decoding="async" />
+            <span class="card-media-tag">02 / LIGA NACIONAL</span>
+            <span class="card-media-code" aria-hidden="true">PROBOT</span>
+          </div>
+          <div class="card-body">
+            <div class="card-kicker">PROBOT SCHOOL · LIGA NACIONAL</div>
+            <h3>Robots de fútbol, mini sumo y sigue-líneas</h3>
+            <p class="card-subtitle">Hardware · firmware · pista</p>
+            <p>Del esquema al chasis y del driver al firmware. Control de motores, puentes H, sensores IR/US y lógica de decisión sobre Arduino, AVR y ESP32. Calibración real después de cada prueba en pista.</p>
+            <div class="badges" aria-label="Tecnologías">
+              <span>C/C++</span><span>ESP32</span><span>Arduino</span><span>AVR</span><span>PWM</span><span>Puente H</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://github.com/Lu92123" target="_blank" rel="noopener noreferrer" data-link="probotGithub">Ver código <span aria-hidden="true">↗</span></a>
+              <a class="btn" href="assets/img/probot-robot.jpg" target="_blank" rel="noopener noreferrer">Ver foto <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="photo-strip reveal" aria-label="Registro fotográfico de competencias">
+        <a class="photo-tile" href="assets/img/first-2.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/first-2.jpg" alt="Vista general de la cancha de FIRST con equipos y público" width="1200" height="800" loading="lazy" decoding="async" />
+          <span>FIRST · ARENA</span>
+        </a>
+        <a class="photo-tile" href="assets/img/first-team.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/first-team.jpg" alt="Foto grupal del equipo de FIRST con las mascotas del evento" width="900" height="1200" loading="lazy" decoding="async" />
+          <span>FIRST · EQUIPO</span>
+        </a>
+        <a class="photo-tile" href="assets/img/probot-team.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/probot-team.jpg" alt="Equipo de Probot School junto a los robots en la mesa de trabajo" width="1600" height="900" loading="lazy" decoding="async" />
+          <span>PROBOT · EQUIPO</span>
+        </a>
+        <a class="photo-tile" href="assets/img/probot-2.jpg" target="_blank" rel="noopener noreferrer">
+          <img src="assets/img/probot-2.jpg" alt="Equipo de Probot School durante la competencia de fútbol robótico" width="1200" height="800" loading="lazy" decoding="async" />
+          <span>PROBOT · PISTA</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 03 · Speedcubing -->
+    <section class="section section-cubing" id="cubing" aria-labelledby="cubing-title">
+      <div class="section-head reveal">
+        <span class="section-index" aria-hidden="true">03</span>
+        <span class="section-kicker">APRENDIZAJE / SPEEDCUBING</span>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="cubing-grid">
+        <div class="cubing-media reveal" id="project-cubing" data-project-card="cubing">
+          <img src="assets/img/cubing.jpg" alt="Cubo de Rubik 3x3 junto a un cronómetro" width="1280" height="720" loading="lazy" decoding="async" />
+          <div class="cubing-average">
+            <strong>~30s</strong>
+            <span>promedio 3×3</span>
+          </div>
+          <span class="card-media-tag">03 / MÉTODO</span>
+        </div>
+
+        <div class="cubing-copy reveal">
+          <h2 id="cubing-title">El cubo como<br /><em>método de ingeniería.</em></h2>
+          <p class="cubing-lead">Resolver un 3×3 en ~30 segundos no es un truco de manos. Es un sistema de práctica deliberada: reconocer el estado, anticipar el siguiente paso y ejecutar bajo presión.</p>
+          <p>Cada solve es una prueba corta. Hay un problema, un tiempo y una decisión siguiente. Cuando un tiempo sale mal, separo el caso, practico esa parte y vuelvo a medir. La misma lógica que uso para depurar un sistema embebido.</p>
+
+          <div class="cubing-points">
+            <div class="point">
+              <strong>Patrones</strong>
+              <span>Leer el estado y elegir el siguiente movimiento sin dudar.</span>
+            </div>
+            <div class="point">
+              <strong>Disciplina</strong>
+              <span>Practicar lo que falla, no solo lo que ya sale bien.</span>
+            </div>
+            <div class="point">
+              <strong>Memoria muscular</strong>
+              <span>Convertir secuencias complejas en respuestas automáticas.</span>
+            </div>
+            <div class="point">
+              <strong>Perseverancia</strong>
+              <span>Aceptar tiempos malos y volver al siguiente intento.</span>
+            </div>
+          </div>
+
+          <blockquote class="cubing-quote">“La constancia no es repetir: es medir, ajustar y volver a intentarlo.”</blockquote>
+
+          <div class="cubing-actions">
+            <a class="btn" href="https://www.worldcubeassociation.org/" target="_blank" rel="noopener noreferrer" data-link="cubingWca">Perfil WCA <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost" href="#terminal-hero" data-scroll-to="terminal-hero">Volver a la terminal <span aria-hidden="true">↑</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Contacto -->
+    <section class="section section-contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-grid">
+        <div class="contact-copy reveal">
+          <span class="section-kicker">04 / CONTACTO</span>
+          <h2 id="contact-title">Construyamos algo<br /><em>que funcione.</em></h2>
+          <p>Colaboraciones, competencias, proyectos open source o una conversación sobre hardware. La terminal también acepta comandos.</p>
+        </div>
+
+        <div class="contact-links reveal" aria-label="Enlaces de contacto">
+          <a class="contact-link" href="https://github.com/Lu92123" target="_blank" rel="noopener noreferrer">
+            <span>GitHub</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" data-link="linkedin">
+            <span>LinkedIn</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-link" href="#terminal-hero" data-contact="email">
+            <span>Email</span>
+            <span class="contact-pending" aria-hidden="true">[ PENDIENTE ]</span>
+          </a>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <span>© <span data-year>2026</span> LUCAS · LU92123</span>
+        <span class="footer-mid">HECHO CON FÓSFORO, C++ Y DEMASIADAS HORAS DE PIT</span>
+        <a href="#terminal-hero" data-scroll-to="terminal-hero">Volver arriba <span aria-hidden="true">↑</span></a>
+      </footer>
+    </section>
+  </main>
 
   <canvas id="matrix-canvas" aria-hidden="true"></canvas>
   <div class="matrix-veil" id="matrix-veil" aria-hidden="true">

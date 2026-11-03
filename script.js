@@ -13,16 +13,23 @@ const CONFIG = {
   github: 'https://github.com/Lu92123',
   // Rellena estos campos cuando los tengas. Si quedan vacíos,
   // la terminal mostrará un marcador "[PENDIENTE]" en su lugar.
-  email: '',
+  email: 'rodrigueztradlucas@gmail.com',
   linkedin: '',
   cubingAverage: '~30 s',
   firstSeasons: '3+',
+  // Slots de imagen locales. Reemplazá estos archivos por tus fotos reales
+  // manteniendo el mismo nombre, o cambiá la ruta acá.
+  images: {
+    first: 'assets/img/first-robot.jpg',
+    probot: 'assets/img/probot-robot.jpg',
+    cubing: 'assets/img/cubing.jpg'
+  },
   // Enlaces de media. Pega una URL y el botón se vuelve un enlace real.
   media: {
     firstPhotos: '',
     firstGithub: '',
     probotPhotos: '',
-    probotGithub: '',
+    probotGithub: 'https://github.com/Lu92123/Robot-Futbol-Liga',
     cubingWca: ''
   }
 };
@@ -34,6 +41,63 @@ const THEMES = {
 };
 
 const THEME_ORDER = ['amber', 'green', 'mono'];
+
+/* ---------- Proyectos: deck HUD de la terminal ----------
+   Cada tarjeta es un acceso directo a la ficha visual de la Capa 2. */
+
+const PROJECT_CARDS = [
+  {
+    id: 'first',
+    index: '01',
+    kicker: 'ROBÓTICA DE COMPETICIÓN',
+    title: 'FIRST · FTC / FRC',
+    subtitle: 'MECÁNICA · AUTÓNOMO · PIT CREW',
+    media: 'ROBOT / PIT',
+    image: CONFIG.images.first,
+    imageAlt: 'Robot de competición FIRST FTC/FRC en la cancha',
+    badges: ['C++', 'JAVA', 'CAD', 'PID', 'SENSORES', 'FTC', 'FRC'],
+    repo: CONFIG.media.firstGithub,
+    repoKey: 'firstGithub',
+    repoLabel: 'VER CÓDIGO',
+    target: 'project-first'
+  },
+  {
+    id: 'probot',
+    index: '02',
+    kicker: 'HARDWARE + FIRMWARE',
+    title: 'PROBOT SCHOOL',
+    subtitle: 'FÚTBOL · MINI SUMO · SIGUE-LÍNEAS',
+    media: 'PISTA / CHASIS',
+    image: CONFIG.images.probot,
+    imageAlt: 'Robot de Probot School en la pista de competición',
+    badges: ['C/C++', 'ARDUINO', 'AVR', 'ESP32', 'PWM', 'IR'],
+    repo: CONFIG.media.probotGithub,
+    repoKey: 'probotGithub',
+    repoLabel: 'VER CÓDIGO',
+    target: 'project-probot'
+  },
+  {
+    id: 'cubing',
+    index: '03',
+    kicker: 'APRENDIZAJE AUTÓNOMO',
+    title: 'SPEEDCUBING',
+    subtitle: `${CONFIG.cubingAverage} · PATRONES · MÉTODO`,
+    media: 'CUBO / TIMER',
+    image: CONFIG.images.cubing,
+    imageAlt: 'Cubo de Rubik 3x3 junto a un cronómetro',
+    badges: ['3×3', 'LOOK-AHEAD', 'PATRONES', 'DISCIPLINA'],
+    repo: CONFIG.media.cubingWca,
+    repoKey: 'cubingWca',
+    repoLabel: 'PERFIL WCA',
+    target: 'project-cubing'
+  }
+];
+
+const PROJECT_TARGETS = {
+  first: 'project-first',
+  probot: 'project-probot',
+  cubing: 'project-cubing'
+};
 
 /* ---------- Referencias del DOM ---------- */
 
@@ -446,111 +510,79 @@ function aboutBlocks() {
 
 /* ---------- Proyectos ---------- */
 
+function deckCodeAction(card) {
+  const label = `[ ${card.repoLabel || 'VER CÓDIGO'} ]`;
+
+  if (card.repo) {
+    return `<a class="hud-btn" href="${esc(card.repo)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+  }
+
+  return `<button type="button" class="hud-btn" data-todo="${esc(card.repoKey)}">${label}</button>`;
+}
+
+function deckCardMarkup(card) {
+  return `
+    <article class="hud-card">
+      <button type="button" class="hud-open" data-scroll-to="${esc(card.target)}" aria-label="Ver ${esc(card.title)} en el portafolio visual">
+        <span class="hud-media media-frame" data-path="${esc(card.image)}">
+          <img src="${esc(card.image)}" alt="${esc(card.imageAlt)}" loading="lazy" decoding="async" />
+          <span class="media-scanline" aria-hidden="true"></span>
+          <span class="media-stamp" aria-hidden="true">${esc(card.index)} · ${esc(card.media)}</span>
+          <span class="media-fallback" aria-hidden="true">
+            <strong>NO SIGNAL</strong>
+            <span>${esc(card.image)}</span>
+          </span>
+          <span class="media-cta" aria-hidden="true">[ ABRIR FICHA ]</span>
+        </span>
+        <span class="hud-copy">
+          <span class="hud-kicker"><b>${esc(card.index)}</b> / ${esc(card.kicker)}</span>
+          <span class="hud-title">${esc(card.title)}<span class="hud-arrow" aria-hidden="true">↓</span></span>
+          <span class="hud-sub">${esc(card.subtitle)}</span>
+          <span class="hud-badges">${card.badges.map((badge) => `<span class="hud-badge">${esc(badge)}</span>`).join('')}</span>
+        </span>
+      </button>
+      <div class="hud-foot">
+        <span class="hud-signal">SIGNAL OK</span>
+        <div class="hud-actions">
+          <button type="button" class="hud-btn primary" data-scroll-to="${esc(card.target)}">[ VER FICHA ↓ ]</button>
+          ${deckCodeAction(card)}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
 function projectsIndexBlocks() {
-  return [
-    {
-      cls: 'block',
-      html: `
-        <div class="eyebrow">ÍNDICE DE PROYECTOS <span class="dim">// 3 ÁREAS</span></div>
-        <p class="dim mono-small">Selecciona una tarjeta o escribe <span class="hl">projects 1</span>, <span class="hl">projects 2</span> o <span class="hl">projects 3</span>.</p>
-        <div class="project-grid">
-          <button type="button" class="project-card" data-cmd="projects 1">
-            <span class="pc-head"><span class="pc-index">01</span><span class="pc-title">FIRST · FTC / FRC</span><span class="pc-arrow">→</span></span>
-            <span class="pc-desc">Más de tres temporadas de robótica competitiva internacional: mecánica, autonomía y presión real.</span>
-            <span class="pc-tags"><span class="tag">Ingeniería</span><span class="tag">Equipo</span><span class="tag">Competencia</span></span>
-          </button>
-          <button type="button" class="project-card" data-cmd="projects 2">
-            <span class="pc-head"><span class="pc-index">02</span><span class="pc-title">PROBOT SCHOOL</span><span class="pc-arrow">→</span></span>
-            <span class="pc-desc">Robots de fútbol, mini sumo y sigue-líneas: chasis, circuitos, motores y firmware en C/C++.</span>
-            <span class="pc-tags"><span class="tag">Hardware</span><span class="tag">Firmware</span><span class="tag">Pista</span></span>
-          </button>
-          <button type="button" class="project-card" data-cmd="projects 3">
-            <span class="pc-head"><span class="pc-index">03</span><span class="pc-title">SPEEDCUBING</span><span class="pc-arrow">→</span></span>
-            <span class="pc-desc">Cubo de Rubik en ${CONFIG.cubingAverage}. Disciplina, patrones y un método de aprendizaje aplicado a la ingeniería.</span>
-            <span class="pc-tags"><span class="tag">Disciplina</span><span class="tag">Patrones</span><span class="tag">Método</span></span>
-          </button>
-        </div>
-      `
-    }
-  ];
-}
+  const cards = PROJECT_CARDS.map(deckCardMarkup).join('');
 
-function projectFirstBlocks() {
   return [
     {
       cls: 'block',
       html: `
-        <div class="eyebrow">PROYECTO 01 / ROBÓTICA DE COMPETICIÓN</div>
-        <h3>FIRST · FTC / FRC</h3>
-        <p class="lead"><strong>${CONFIG.firstSeasons} temporadas</strong> compitiendo en equipos internacionales de FIRST. Ingeniería mecánica, programación, trabajo en equipo bajo presión y una sola regla: el robot tiene que funcionar.</p>
-        <p>FIRST no es un club de robótica tranquilo. Es un ciclo corto y brutal de diseño, fabricación, cableado, programación, pruebas y fallos que aparecen justo antes de la competencia. Aprendí a iterar con información incompleta y a defender decisiones técnicas frente al equipo.</p>
-        ${kv([
-          ['TRAYECTORIA', `${CONFIG.firstSeasons} temporadas · FTC & FRC`],
-          ['DISCIPLINAS', 'Diseño mecánico · CAD · programación · electrónica'],
-          ['AUTÓNOMO', 'Lógica de control, sensores, lazos PID y calibración'],
-          ['PIT CREW', 'Diagnóstico y reparación con el reloj en contra'],
-          ['HABILIDADES', 'Trabajo en equipo · comunicación · resolución real']
-        ])}
-        <div class="section-title">Qué construí / qué aprendí</div>
-        <ul class="bullets">
-          <li><strong>Subsistemas mecánicos:</strong> chasis, intakes, elevadores y transmisiones pensadas para reparar rápido.</li>
-          <li><strong>Programación autónoma y teleoperada:</strong> control, sensores, secuencias, telemetría y ajuste fino.</li>
-          <li><strong>Iteración real:</strong> prototipo → prueba → fallo → corrección, con fechas que no se mueven.</li>
-          <li><strong>Coordinación:</strong> mecánica, electricidad, programación y scouting tomando decisiones en cancha.</li>
-          <li><strong>Mentalidad:</strong> no existe el “casi funciona”; el robot compite o no compite.</li>
-        </ul>
+        <div class="eyebrow">DECK DE PROYECTOS <span class="dim">// 3 MÓDULOS</span></div>
+        <p class="dim mono-small">Abrí una tarjeta para saltar a la ficha visual completa. También podés usar <span class="hl">projects 1</span>, <span class="hl">projects 2</span> o <span class="hl">projects 3</span>.</p>
       `
     },
     {
-      cls: 'block',
+      cls: 'block project-block',
+      instant: true,
       html: `
-        <div class="media-row">
-          ${mediaButton('[ VER FOTOS/VIDEO ]', CONFIG.media.firstPhotos, 'firstPhotos')}
-          ${mediaButton('[ LINK GITHUB ]', CONFIG.media.firstGithub, 'firstGithub')}
-          <button type="button" class="term-btn ghost" data-cmd="projects">[ ← ÍNDICE ]</button>
+        <div class="project-deck">
+          <div class="deck-head">
+            <span class="deck-title">VT-100 // PROJECT DECK</span>
+            <span class="deck-meta">3 MÓDULOS · HUD READY</span>
+          </div>
+          <div class="hud-grid">${cards}</div>
+          <div class="deck-foot">
+            <span class="deck-status"><span class="deck-led" aria-hidden="true"></span> BUS LISTO</span>
+            <span class="deck-hint">CLICK EN UNA TARJETA PARA VERLA EN EL PORTAFOLIO</span>
+          </div>
         </div>
-        <div class="line dim mono-small">Material audiovisual en preparación. El enlace de GitHub está disponible en <button type="button" class="term-btn ghost" data-cmd="contact">contact</button>.</div>
-      `
-    }
-  ];
-}
-
-function projectProbotBlocks() {
-  return [
-    {
-      cls: 'block',
-      html: `
-        <div class="eyebrow">PROYECTO 02 / HARDWARE + FIRMWARE</div>
-        <h3>PROBOT SCHOOL · ROBÓTICA DE COMPETICIÓN</h3>
-        <p class="lead">Robots autónomos y teleoperados para <strong>fútbol robótico, mini sumo y sigue-líneas</strong>. Del esquema al chasis, del driver al firmware, y de la mesa de trabajo a la pista.</p>
-        <p>Aquí el aprendizaje fue vertical: tocar motores, medir voltajes, soldar conexiones, leer sensores y descubrir que un cable flojo puede arruinar una estrategia perfecta. Programar el robot es solo la mitad; la otra mitad es hacer que el mundo físico coopere.</p>
-        ${kv([
-          ['CATEGORÍAS', 'Fútbol robótico · Mini sumo · Sigue-líneas'],
-          ['HARDWARE', 'Drivers de motor · puentes H · sensores IR/US · baterías'],
-          ['FIRMWARE', 'C/C++ sobre Arduino, AVR y ESP32'],
-          ['CONTROL', 'Lazos de seguimiento, calibración y lógica de decisión'],
-          ['DISEÑO', 'Chasis, soportes y circuitos pensados para reparar rápido']
-        ])}
-        <div class="section-title">Logros y aprendizajes</div>
-        <ul class="bullets">
-          <li><strong>Integración completa:</strong> chasis, electrónica, alimentación y firmware funcionando como un sistema.</li>
-          <li><strong>Calibración real:</strong> ajuste de sensores y control después de cada prueba en pista, no solo en el escritorio.</li>
-          <li><strong>Competencia:</strong> participación en categorías locales y escolares de fútbol, mini sumo y sigue-líneas.</li>
-          <li><strong>Diagnóstico:</strong> aislar fallas eléctricas, mecánicas y de software con herramientas limitadas.</li>
-          <li><strong>Documentación:</strong> registrar cambios para que el siguiente ajuste no empiece desde cero.</li>
-        </ul>
       `
     },
     {
-      cls: 'block',
-      html: `
-        <div class="media-row">
-          ${mediaButton('[ VER FOTOS/VIDEO ]', CONFIG.media.probotPhotos, 'probotPhotos')}
-          ${mediaButton('[ LINK GITHUB ]', CONFIG.media.probotGithub, 'probotGithub')}
-          <button type="button" class="term-btn ghost" data-cmd="projects">[ ← ÍNDICE ]</button>
-        </div>
-        <div class="line dim mono-small">Logros, categorías y material de pista: la lista crece con cada temporada.</div>
-      `
+      cls: 'line dim mono-small',
+      html: `También podés escribir <button type="button" class="term-btn ghost" data-cmd="gui">gui</button> o <button type="button" class="term-btn ghost" data-cmd="explore">explore</button> para bajar al portafolio visual.`
     }
   ];
 }
@@ -600,7 +632,7 @@ function cubingBlocks(extended = false) {
         </div>
         <div class="media-row">
           ${mediaButton('[ PERFIL WCA ]', CONFIG.media.cubingWca, 'cubingWca')}
-          <button type="button" class="term-btn ghost" data-cmd="projects 3">[ FICHA DE PROYECTO ]</button>
+          <button type="button" class="term-btn ghost" data-scroll-to="project-cubing">[ VER EN PORTAFOLIO ↓ ]</button>
           <button type="button" class="term-btn ghost" data-cmd="projects">[ ← ÍNDICE ]</button>
         </div>
       `
@@ -611,6 +643,7 @@ function cubingBlocks(extended = false) {
       html: `
         <div class="media-row">
           ${mediaButton('[ PERFIL WCA ]', CONFIG.media.cubingWca, 'cubingWca')}
+          <button type="button" class="term-btn ghost" data-scroll-to="project-cubing">[ VER EN PORTAFOLIO ↓ ]</button>
           <button type="button" class="term-btn ghost" data-cmd="cubing">[ LEER MÁS ]</button>
           <button type="button" class="term-btn ghost" data-cmd="projects">[ ← ÍNDICE ]</button>
         </div>
@@ -856,7 +889,8 @@ function exitBlocks() {
 const COMMAND_META = [
   { name: 'help', aliases: ['ayuda', '?'], desc: 'Muestra esta lista de comandos.', usage: '' },
   { name: 'about', aliases: ['acerca', 'info'], desc: 'Perfil, enfoque y filosofía de trabajo.', usage: '' },
-  { name: 'projects', aliases: ['proj', 'proyectos'], desc: 'Índice y detalle de proyectos.', usage: '[1-3]' },
+  { name: 'projects', aliases: ['proj', 'proyectos'], desc: 'Deck de proyectos y salto a la ficha visual.', usage: '[1-3]' },
+  { name: 'gui', aliases: ['explore', 'portfolio', 'visual', 'web'], desc: 'Baja al portafolio visual con scroll suave.', usage: '' },
   { name: 'cubing', aliases: ['cube', 'rubik'], desc: 'Speedcubing: método, disciplina y mentalidad.', usage: '' },
   { name: 'theme', aliases: ['fosforo'], desc: 'Cambia el fósforo de la pantalla.', usage: '[amber|green|mono]' },
   { name: 'crt', aliases: ['scanlines'], desc: 'Activa o desactiva el efecto CRT.', usage: '[on|off]' },
@@ -916,18 +950,18 @@ async function handleProjects(args) {
     return;
   }
 
-  if (['1', 'first', 'ftc', 'frc'].includes(target)) {
-    await respond(projectFirstBlocks());
-    return;
-  }
+  let card = null;
 
-  if (['2', 'probot', 'probot-school', 'local'].includes(target)) {
-    await respond(projectProbotBlocks());
-    return;
-  }
+  if (['1', 'first', 'ftc', 'frc'].includes(target)) card = PROJECT_CARDS[0];
+  if (['2', 'probot', 'probot-school', 'local'].includes(target)) card = PROJECT_CARDS[1];
+  if (['3', 'cubing', 'rubik', 'speedcubing'].includes(target)) card = PROJECT_CARDS[2];
 
-  if (['3', 'cubing', 'rubik', 'speedcubing'].includes(target)) {
-    await respond(cubingBlocks(false));
+  if (card) {
+    appendInstant({
+      cls: 'line dim mono-small',
+      html: `Abriendo <span class="hl">${esc(card.title)}</span> en el portafolio visual ↓`
+    });
+    scrollToTarget(card.target);
     return;
   }
 
@@ -947,6 +981,14 @@ async function handleProjects(args) {
       `
     }
   ]);
+}
+
+async function handleGui() {
+  appendInstant({
+    cls: 'line dim mono-small',
+    html: `Abriendo <span class="hl">PORTAFOLIO VISUAL</span> · usa la terminal cuando quieras volver ↑`
+  });
+  scrollToTarget('portfolio');
 }
 
 async function handleCubing() {
@@ -1323,6 +1365,7 @@ const COMMAND_HANDLERS = {
   help: () => handleHelp(),
   about: () => handleAbout(),
   projects: (args) => handleProjects(args),
+  gui: () => handleGui(),
   cubing: () => handleCubing(),
   theme: (args) => handleTheme(args),
   crt: (args) => handleCrt(args),
@@ -1613,6 +1656,102 @@ function handleTodo(key) {
 }
 
 /* ============================================================
+   CAPA 2 · NAVEGACIÓN, ENLACES Y REVEAL
+   ============================================================ */
+
+function scrollToTarget(target) {
+  const element = typeof target === 'string' ? document.getElementById(target) : target;
+  if (!element) return;
+
+  element.scrollIntoView({
+    behavior: reducedMotion.matches ? 'auto' : 'smooth',
+    block: 'start'
+  });
+
+  if (element.matches('.portfolio-card, .cubing-media')) {
+    element.classList.add('is-highlighted');
+    clearTimeout(element.highlightTimer);
+    element.highlightTimer = window.setTimeout(() => {
+      element.classList.remove('is-highlighted');
+    }, 2200);
+  }
+
+  if (!element.hasAttribute('tabindex')) element.setAttribute('tabindex', '-1');
+  element.focus({ preventScroll: true });
+
+  try {
+    history.replaceState(null, '', `#${element.id}`);
+  } catch (e) { /* file:// puede bloquear replaceState */ }
+}
+
+function scrollToProject(id) {
+  scrollToTarget(PROJECT_TARGETS[id] || id);
+}
+
+function applyConfigLinks() {
+  document.querySelectorAll('[data-link]').forEach((element) => {
+    const key = element.getAttribute('data-link');
+    const url = key === 'linkedin' ? CONFIG.linkedin : CONFIG.media[key];
+
+    if (url) {
+      element.href = url;
+      element.classList.remove('is-pending');
+      element.removeAttribute('data-pending-link');
+      return;
+    }
+
+    element.href = '#';
+    element.classList.add('is-pending');
+    element.setAttribute('data-pending-link', key);
+  });
+
+  document.querySelectorAll('[data-contact="email"]').forEach((element) => {
+    if (!CONFIG.email) {
+      element.href = '#';
+      element.setAttribute('data-pending-link', 'email');
+      return;
+    }
+
+    element.href = `mailto:${CONFIG.email}`;
+    const pending = element.querySelector('.contact-pending');
+    if (pending) {
+      const arrow = document.createElement('span');
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '↗';
+      pending.replaceWith(arrow);
+    }
+  });
+
+  document.querySelectorAll('[data-year]').forEach((element) => {
+    element.textContent = String(new Date().getFullYear());
+  });
+}
+
+function initReveal() {
+  document.documentElement.classList.add('reveal-ready');
+  const elements = [...document.querySelectorAll('.reveal')];
+  if (!elements.length) return;
+
+  if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+    elements.forEach((element) => element.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: '0px 0px -8% 0px',
+    threshold: 0.08
+  });
+
+  elements.forEach((element) => observer.observe(element));
+}
+
+/* ============================================================
    MATRIX
    ============================================================ */
 
@@ -1891,12 +2030,41 @@ function bindEvents() {
   });
 
   terminalEl.addEventListener('click', (event) => {
-    if (event.target.closest('button, a, input, .project-card, .term-btn')) return;
+    if (event.target.closest('button, a, input, .hud-card, .term-btn')) return;
     if (String(window.getSelection())) return;
     focusInput();
   });
 
   document.addEventListener('click', (event) => {
+    const pendingLink = event.target.closest('[data-pending-link]');
+    if (pendingLink) {
+      event.preventDefault();
+      const labels = {
+        firstGithub: 'REPOSITORIO FIRST',
+        probotGithub: 'REPOSITORIO PROBOT',
+        cubingWca: 'PERFIL WCA',
+        linkedin: 'LINKEDIN',
+        email: 'EMAIL'
+      };
+      const key = pendingLink.getAttribute('data-pending-link');
+      showToast(`ENLACE PENDIENTE :: ${labels[key] || key}`);
+      return;
+    }
+
+    const scrollTrigger = event.target.closest('[data-scroll-to]');
+    if (scrollTrigger) {
+      event.preventDefault();
+      scrollToTarget(scrollTrigger.getAttribute('data-scroll-to'));
+      return;
+    }
+
+    const projectTrigger = event.target.closest('[data-scroll-project]');
+    if (projectTrigger) {
+      event.preventDefault();
+      scrollToProject(projectTrigger.getAttribute('data-scroll-project'));
+      return;
+    }
+
     const commandButton = event.target.closest('[data-cmd]');
     if (commandButton) {
       event.preventDefault();
@@ -1932,6 +2100,8 @@ function init() {
 
   yearEl.textContent = String(new Date().getFullYear());
 
+  applyConfigLinks();
+  initReveal();
   bindEvents();
   updateCaret();
   bootSequence();
