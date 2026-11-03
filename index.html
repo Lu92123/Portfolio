@@ -98,6 +98,7 @@
             <button type="button" data-cmd="about" title="Perfil del operador">about</button>
             <button type="button" data-cmd="projects" title="Índice de proyectos">projects</button>
             <button type="button" data-cmd="cubing" title="Speedcubing">cubing</button>
+            <button type="button" data-cmd="gallery" title="Galería de fotos y video">gallery</button>
             <button type="button" data-cmd="explore" title="Ir al portafolio visual">explore</button>
             <button type="button" data-cmd="theme" title="Cambiar fósforo">theme</button>
             <button type="button" data-cmd="matrix" title="Lluvia digital">matrix</button>
@@ -180,6 +181,7 @@
       <nav class="site-links" aria-label="Secciones">
         <a href="#about" data-scroll-to="about">Perfil</a>
         <a href="#projects" data-scroll-to="projects">Proyectos</a>
+        <a href="#gallery" data-scroll-to="gallery">Galería</a>
         <a href="#cubing" data-scroll-to="cubing">Cubing</a>
         <a href="#contact" data-scroll-to="contact">Contacto</a>
       </nav>
@@ -307,30 +309,232 @@
         </article>
       </div>
 
-      <div class="photo-strip reveal" aria-label="Registro fotográfico de competencias">
-        <a class="photo-tile" href="assets/img/first-2.jpg" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/first-2.jpg" alt="Vista general de la cancha de FIRST con equipos y público" width="1200" height="800" loading="lazy" decoding="async" />
-          <span>FIRST · ARENA</span>
-        </a>
-        <a class="photo-tile" href="assets/img/first-team.jpg" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/first-team.jpg" alt="Foto grupal del equipo de FIRST con las mascotas del evento" width="900" height="1200" loading="lazy" decoding="async" />
-          <span>FIRST · EQUIPO</span>
-        </a>
-        <a class="photo-tile" href="assets/img/probot-team.jpg" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/probot-team.jpg" alt="Equipo de Probot School junto a los robots en la mesa de trabajo" width="1600" height="900" loading="lazy" decoding="async" />
-          <span>PROBOT · EQUIPO</span>
-        </a>
-        <a class="photo-tile" href="assets/img/probot-2.jpg" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/probot-2.jpg" alt="Equipo de Probot School durante la competencia de fútbol robótico" width="1200" height="800" loading="lazy" decoding="async" />
-          <span>PROBOT · PISTA</span>
+      <div class="gallery-cta reveal">
+        <div class="gallery-cta-copy">
+          <span class="gallery-cta-kicker">REGISTRO MULTIMEDIA · 21 FOTOS + 1 VIDEO</span>
+          <p>Canchas, pits, premios y robots. Todas las fotos y el video, completos y sin recortes.</p>
+        </div>
+        <a class="btn btn-primary" href="#gallery" data-scroll-to="gallery">
+          Ver galería completa <span aria-hidden="true">↓</span>
         </a>
       </div>
     </section>
 
-    <!-- 03 · Speedcubing -->
-    <section class="section section-cubing" id="cubing" aria-labelledby="cubing-title">
+    <!-- 03 · Galería -->
+    <section class="section section-gallery" id="gallery" aria-labelledby="gallery-title">
       <div class="section-head reveal">
         <span class="section-index" aria-hidden="true">03</span>
+        <span class="section-kicker">REGISTRO / MULTIMEDIA</span>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="gallery-intro reveal">
+        <div>
+          <h2 id="gallery-title">Todo lo que<br /><em>quedó en cámara.</em></h2>
+          <p>Veintiuna fotos y un video de competencias, pits, equipos y premios. Hacé clic en cualquier miniatura para abrirla a pantalla completa y recorrer la galería sin cerrar el visor.</p>
+        </div>
+        <div class="gallery-meta" aria-label="Resumen de la galería">
+          <span><strong>22</strong> elementos</span>
+          <span><strong>02</strong> equipos</span>
+          <span><strong>10 s</strong> de video</span>
+        </div>
+      </div>
+
+      <div class="gallery-filters reveal" role="group" aria-label="Filtrar la galería por categoría">
+        <button type="button" class="gallery-filter is-active" data-gallery-filter="all" aria-pressed="true">Todo <span>22</span></button>
+        <button type="button" class="gallery-filter" data-gallery-filter="first" aria-pressed="false">FIRST <span>13</span></button>
+        <button type="button" class="gallery-filter" data-gallery-filter="probot" aria-pressed="false">Probot <span>8</span></button>
+        <button type="button" class="gallery-filter" data-gallery-filter="cubing" aria-pressed="false">Cubing <span>1</span></button>
+        <button type="button" class="gallery-filter" data-gallery-filter="video" aria-pressed="false">Video <span>1</span></button>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-competencia-01.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-competencia-01.jpg" data-type="image" data-title="FIRST · COMPETENCIA 01" data-caption="Ronda de clasificación en la cancha de FIRST.">
+            <img src="assets/img/gallery/first-competencia-01-thumb.jpg" alt="Robot de FIRST durante la ronda de clasificación" width="720" height="542" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">01</span>
+            <span class="gallery-label">FIRST · COMPETENCIA 01</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-competencia-02.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-competencia-02.jpg" data-type="image" data-title="FIRST · COMPETENCIA 02" data-caption="Robot y equipo preparando la siguiente partida.">
+            <img src="assets/img/gallery/first-competencia-02-thumb.jpg" alt="Equipo de FIRST preparando el robot entre partidos" width="720" height="542" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">02</span>
+            <span class="gallery-label">FIRST · COMPETENCIA 02</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-competencia-03.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-competencia-03.jpg" data-type="image" data-title="FIRST · COMPETENCIA 03" data-caption="Inspección y ajustes entre partidos.">
+            <img src="assets/img/gallery/first-competencia-03-thumb.jpg" alt="Ajustes mecánicos al robot de FIRST durante la competencia" width="720" height="542" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">03</span>
+            <span class="gallery-label">FIRST · COMPETENCIA 03</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-competencia-04.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-competencia-04.jpg" data-type="image" data-title="FIRST · COMPETENCIA 04" data-caption="Vista general del evento FIRST.">
+            <img src="assets/img/gallery/first-competencia-04-thumb.jpg" alt="Vista general de la cancha y el público en el evento FIRST" width="720" height="540" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">04</span>
+            <span class="gallery-label">FIRST · COMPETENCIA 04</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-grupal-01.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-grupal-01.jpg" data-type="image" data-title="FIRST · EQUIPO 01" data-caption="Equipo de FIRST con el robot en el pit.">
+            <img src="assets/img/gallery/first-grupal-01-thumb.jpg" alt="Equipo de FIRST posando con el robot en el pit" width="720" height="540" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">05</span>
+            <span class="gallery-label">FIRST · EQUIPO 01</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-grupal-02.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-grupal-02.jpg" data-type="image" data-title="FIRST · EQUIPO 02" data-caption="Foto grupal del equipo durante la competencia.">
+            <img src="assets/img/gallery/first-grupal-02-thumb.jpg" alt="Foto grupal del equipo de FIRST durante la competencia" width="720" height="540" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">06</span>
+            <span class="gallery-label">FIRST · EQUIPO 02</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-grupal-03.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-grupal-03.jpg" data-type="image" data-title="FIRST · EQUIPO 03" data-caption="Equipo reunido antes de la ronda final.">
+            <img src="assets/img/gallery/first-grupal-03-thumb.jpg" alt="Equipo de FIRST reunido antes de la ronda final" width="720" height="480" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">07</span>
+            <span class="gallery-label">FIRST · EQUIPO 03</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-grupal-04.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-grupal-04.jpg" data-type="image" data-title="FIRST · EQUIPO 04" data-caption="Cierre de la competencia con todo el equipo.">
+            <img src="assets/img/gallery/first-grupal-04-thumb.jpg" alt="Foto de cierre del equipo de FIRST en la competencia" width="720" height="480" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">08</span>
+            <span class="gallery-label">FIRST · EQUIPO 04</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-premio-01.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-premio-01.jpg" data-type="image" data-title="FIRST · PREMIO" data-caption="Reconocimiento en la ceremonia de premios.">
+            <img src="assets/img/gallery/first-premio-01-thumb.jpg" alt="Entrega de un reconocimiento en la ceremonia de premios de FIRST" width="540" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">09</span>
+            <span class="gallery-label">FIRST · PREMIO</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-robot-01.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-robot-01.jpg" data-type="image" data-title="FIRST · ROBOT 01" data-caption="Detalle del robot de FIRST en el pit.">
+            <img src="assets/img/gallery/first-robot-01-thumb.jpg" alt="Detalle del robot de FIRST en el pit" width="540" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">10</span>
+            <span class="gallery-label">FIRST · ROBOT 01</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-robot-02.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-robot-02.jpg" data-type="image" data-title="FIRST · ROBOT 02" data-caption="Mecánica y electrónica del robot.">
+            <img src="assets/img/gallery/first-robot-02-thumb.jpg" alt="Mecánica y electrónica del robot de FIRST" width="540" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">11</span>
+            <span class="gallery-label">FIRST · ROBOT 02</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-robot-03.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-robot-03.jpg" data-type="image" data-title="FIRST · ROBOT 03" data-caption="Robot listo para entrar a la cancha.">
+            <img src="assets/img/gallery/first-robot-03-thumb.jpg" alt="Robot de FIRST listo para entrar a la cancha" width="542" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">12</span>
+            <span class="gallery-label">FIRST · ROBOT 03</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="first">
+          <a class="gallery-thumb" href="assets/img/gallery/first-robot-04.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/first-robot-04.jpg" data-type="image" data-title="FIRST · ROBOT 04" data-caption="El equipo junto al robot de competición.">
+            <img src="assets/img/gallery/first-robot-04-thumb.jpg" alt="Equipo de FIRST junto al robot de competición" width="720" height="480" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">13</span>
+            <span class="gallery-label">FIRST · ROBOT 04</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-grupal-01.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-grupal-01.jpg" data-type="image" data-title="PROBOT · EQUIPO 01" data-caption="Equipo de Probot School en la pista.">
+            <img src="assets/img/gallery/probot-grupal-01-thumb.jpg" alt="Equipo de Probot School en la pista de competición" width="720" height="405" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">14</span>
+            <span class="gallery-label">PROBOT · EQUIPO 01</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-grupal-02.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-grupal-02.jpg" data-type="image" data-title="PROBOT · EQUIPO 02" data-caption="Robots y equipo durante la jornada.">
+            <img src="assets/img/gallery/probot-grupal-02-thumb.jpg" alt="Robots y equipo de Probot School durante la jornada" width="720" height="540" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">15</span>
+            <span class="gallery-label">PROBOT · EQUIPO 02</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-grupal-03.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-grupal-03.jpg" data-type="image" data-title="PROBOT · EQUIPO 03" data-caption="Foto grupal de Probot School.">
+            <img src="assets/img/gallery/probot-grupal-03-thumb.jpg" alt="Foto grupal del equipo de Probot School" width="540" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">16</span>
+            <span class="gallery-label">PROBOT · EQUIPO 03</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-premio-01.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-premio-01.jpg" data-type="image" data-title="PROBOT · PREMIO 01" data-caption="Premio de la Liga Nacional.">
+            <img src="assets/img/gallery/probot-premio-01-thumb.jpg" alt="Entrega de premio de la Liga Nacional a Probot School" width="540" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">17</span>
+            <span class="gallery-label">PROBOT · PREMIO 01</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-premio-02.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-premio-02.jpg" data-type="image" data-title="PROBOT · PREMIO 02" data-caption="Reconocimiento del equipo en la ceremonia.">
+            <img src="assets/img/gallery/probot-premio-02-thumb.jpg" alt="Reconocimiento al equipo de Probot School en la ceremonia" width="540" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">18</span>
+            <span class="gallery-label">PROBOT · PREMIO 02</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-premio-03.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-premio-03.jpg" data-type="image" data-title="PROBOT · PREMIO 03" data-caption="Equipo de Probot con el trofeo.">
+            <img src="assets/img/gallery/probot-premio-03-thumb.jpg" alt="Equipo de Probot School posando con el trofeo" width="720" height="540" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">19</span>
+            <span class="gallery-label">PROBOT · PREMIO 03</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-futbol-01.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-futbol-01.jpg" data-type="image" data-title="PROBOT · FÚTBOL" data-caption="Robot de fútbol de Probot en la pista.">
+            <img src="assets/img/gallery/probot-futbol-01-thumb.jpg" alt="Robot de fútbol de Probot School en la pista" width="540" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">20</span>
+            <span class="gallery-label">PROBOT · FÚTBOL</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="probot video" data-type="video">
+          <a class="gallery-thumb" href="assets/img/gallery/probot-video-futbol.mp4" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/probot-video-futbol.mp4" data-poster="assets/img/gallery/probot-video-futbol.jpg" data-type="video" data-title="PROBOT · VIDEO" data-caption="Prueba en pista del robot de fútbol (10 s).">
+            <img src="assets/img/gallery/probot-video-futbol-thumb.jpg" alt="Fotograma del video del robot de fútbol de Probot en la pista" width="720" height="1280" loading="lazy" decoding="async" />
+            <span class="gallery-play" aria-hidden="true">▶</span>
+            <span class="gallery-duration" aria-hidden="true">00:10</span>
+            <span class="gallery-number" aria-hidden="true">21</span>
+            <span class="gallery-label">PROBOT · VIDEO</span>
+          </a>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="cubing">
+          <a class="gallery-thumb" href="assets/img/gallery/cubing-best-time.jpg" target="_blank" rel="noopener noreferrer" data-full="assets/img/gallery/cubing-best-time.jpg" data-type="image" data-title="CUBING · BEST TIME" data-caption="Cubo 3×3 y cronómetro: mejor tiempo personal.">
+            <img src="assets/img/gallery/cubing-best-time-thumb.jpg" alt="Cubo de Rubik 3x3 junto a un cronómetro con el mejor tiempo" width="542" height="720" loading="lazy" decoding="async" />
+            <span class="gallery-number" aria-hidden="true">22</span>
+            <span class="gallery-label">CUBING · BEST TIME</span>
+          </a>
+        </figure>
+      </div>
+
+      <p class="gallery-empty" id="gallery-empty" hidden>No hay elementos en esta categoría.</p>
+    </section>
+
+    <!-- 04 · Speedcubing -->
+    <section class="section section-cubing" id="cubing" aria-labelledby="cubing-title">
+      <div class="section-head reveal">
+        <span class="section-index" aria-hidden="true">04</span>
         <span class="section-kicker">APRENDIZAJE / SPEEDCUBING</span>
         <span class="section-rule" aria-hidden="true"></span>
       </div>
@@ -342,7 +546,7 @@
             <strong>~30s</strong>
             <span>promedio 3×3</span>
           </div>
-          <span class="card-media-tag">03 / MÉTODO</span>
+          <span class="card-media-tag">04 / MÉTODO</span>
         </div>
 
         <div class="cubing-copy reveal">
@@ -379,11 +583,11 @@
       </div>
     </section>
 
-    <!-- 04 · Contacto -->
+    <!-- 05 · Contacto -->
     <section class="section section-contact" id="contact" aria-labelledby="contact-title">
       <div class="contact-grid">
         <div class="contact-copy reveal">
-          <span class="section-kicker">04 / CONTACTO</span>
+          <span class="section-kicker">05 / CONTACTO</span>
           <h2 id="contact-title">Construyamos algo<br /><em>que funcione.</em></h2>
           <p>Colaboraciones, competencias, proyectos open source o una conversación sobre hardware. La terminal también acepta comandos.</p>
         </div>
@@ -411,6 +615,30 @@
       </footer>
     </section>
   </main>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Visor de la galería">
+    <div class="lightbox-shell">
+      <header class="lightbox-bar">
+        <div class="lightbox-meta">
+          <span class="lightbox-counter" id="lightbox-counter">01 / 22</span>
+          <span class="lightbox-caption" id="lightbox-caption">Galería</span>
+        </div>
+        <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar visor">×</button>
+      </header>
+
+      <div class="lightbox-stage" id="lightbox-stage">
+        <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Elemento anterior">‹</button>
+        <div class="lightbox-media" id="lightbox-media"></div>
+        <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Elemento siguiente">›</button>
+      </div>
+
+      <footer class="lightbox-foot">
+        <span class="lightbox-type" id="lightbox-type">IMAGEN</span>
+        <span class="lightbox-hint">← → navegar · ESC cerrar</span>
+        <a class="lightbox-open" id="lightbox-open" href="#" target="_blank" rel="noopener noreferrer">Abrir original ↗</a>
+      </footer>
+    </div>
+  </dialog>
 
   <canvas id="matrix-canvas" aria-hidden="true"></canvas>
   <div class="matrix-veil" id="matrix-veil" aria-hidden="true">
