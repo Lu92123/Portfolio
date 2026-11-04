@@ -1018,7 +1018,7 @@ async function handleGui() {
 async function handleGallery() {
   appendInstant({
     cls: 'line dim mono-small',
-    html: `Abriendo <span class="hl">GALERÍA MULTIMEDIA</span> · 21 fotos + 1 video · clic en una miniatura para ampliar ↓`
+    html: `Abriendo <span class="hl">GALERÍA MULTIMEDIA</span> · 33 fotos + 3 videos · clic en una miniatura para ampliar ↓`
   });
   scrollToTarget('gallery');
 }

@@ -25,7 +25,7 @@ La terminal puede llevar al portafolio con `gui` o `explore` (y sus alias), a la
 | `styles.css` | Temas, efectos CRT, deck HUD de la terminal, capa visual, galería responsive y lightbox. |
 | `script.js` | Motor de tipeo, comandos, historial, autocompletado, scroll, enlaces, reveal, filtros y lightbox. |
 | `assets/img/` | Fotos optimizadas de las tarjetas y de speedcubing. |
-| `assets/img/gallery/` | Versiones web de la galería: 21 fotos full + thumbnails, y el video con su poster. |
+| `assets/img/gallery/` | Versiones web de la galería: 33 fotos full + thumbnails, y 3 videos con sus posters y miniaturas. |
 | `CNAME` | Dominio personalizado para GitHub Pages (`lucastrad.me`). |
 
 No hay dependencias instalables. La única petición externa son las fuentes de Google Fonts (JetBrains Mono y VT323), con fallback a fuentes monoespaciadas del sistema.
@@ -70,31 +70,38 @@ Escribí `help` para ver la lista completa. Los comandos no distinguen mayúscul
 
 ## Galería multimedia
 
-La sección `#gallery` reúne **21 fotos y 1 video** de FIRST, Probot School y speedcubing. Incluye:
+La sección `#gallery` reúne **33 fotos y 3 videos** de FIRST, Probot School, la Copa Andes Robotics y speedcubing. Incluye:
 
-- Filtros por categoría: **Todo**, **FIRST**, **Probot**, **Cubing** y **Video**.
+- Filtros por categoría: **Todo**, **FIRST**, **Probot**, **Copa**, **Cubing** y **Video**.
 - Grid masonry con CSS Grid que conserva la proporción natural de cada foto (sin recortes) y pasa de 5 columnas en desktop a 2 en móvil.
 - Lightbox con `<dialog>` nativo, botón `×`, flechas anterior/siguiente, contador, caption, navegación con `←` / `→`, cierre con `Esc` y swipe en pantallas táctiles.
-- Video H.264/AAC con controles y poster, más un enlace para abrir el archivo original.
+- Videos H.264/AAC con controles y poster, más un enlace para abrir el archivo original.
 - Fallback sin JavaScript: cada miniatura es un enlace real al JPG o MP4 completo.
 
-Los archivos publicados están en `assets/img/gallery/`. Cada foto tiene una versión full para el lightbox (máximo 1920 px de lado) y un thumbnail para el grid (máximo 720 px), ambas con el mismo nombre y el sufijo `-thumb.jpg`:
+Los archivos publicados están en `assets/img/gallery/`. Cada foto tiene una versión full para el lightbox (máximo 1920 px de lado) y un thumbnail para el grid (máximo 720 px), ambas con el mismo nombre y el sufijo `-thumb.jpg`. Cada video suma el MP4, un poster `.jpg` y su thumbnail:
 
-| Grupo | Fotos | Archivos |
+| Grupo | Elementos | Archivos |
 | --- | --- | --- |
 | FIRST · competencia | 4 | `first-competencia-01..04.jpg` |
-| FIRST · equipo | 4 | `first-grupal-01..04.jpg` |
+| FIRST · arena | 1 | `first-arena-01.jpg` |
+| FIRST · equipo | 5 | `first-grupal-01..04.jpg` · `first-team-01.jpg` |
 | FIRST · premio | 1 | `first-premio-01.jpg` |
 | FIRST · robot | 4 | `first-robot-01..04.jpg` |
-| Probot · equipo | 3 | `probot-grupal-01..03.jpg` |
+| Probot · equipo | 4 | `probot-grupal-01..03.jpg` · `probot-team-01.jpg` |
+| Probot · pista | 1 | `probot-pista-01.jpg` |
 | Probot · premio | 3 | `probot-premio-01..03.jpg` |
 | Probot · fútbol | 1 | `probot-futbol-01.jpg` |
+| Probot · robots | 3 | `probot-robot-01.jpg` · `probot-minisumo-01.jpg` · `probot-siguelineas-01.jpg` |
+| Probot · desarrollo | 2 | `probot-desarrollo-01.jpg` · `probot-desarrollo-02.jpg` |
+| Copa · competencia | 1 | `copa-competencia-01.jpg` |
+| Copa · equipo | 1 | `copa-equipo-01.jpg` |
+| Copa · robot | 1 | `copa-robot-01.jpg` |
 | Cubing | 1 | `cubing-best-time.jpg` |
-| Video Probot | 1 | `probot-video-futbol.mp4` · `probot-video-futbol.jpg` (poster) · `probot-video-futbol-thumb.jpg` |
+| Videos Probot | 3 | `probot-video-futbol` · `probot-video-minisumo` · `probot-video-siguelineas` (`.mp4`, `.jpg` poster y `-thumb.jpg`) |
 
 Para reemplazar una foto, sobrescribí su `.jpg` y su `-thumb.jpg` manteniendo el nombre. Para agregar una nueva, duplicá un `<figure class="gallery-item">` en `index.html`, actualizá `data-category`, `data-title`, `data-caption`, los `width`/`height` del thumbnail y los contadores de los filtros.
 
-Las imágenes principales de las tarjetas siguen en `assets/img/` (`first-robot.jpg`, `probot-robot.jpg`, `cubing.jpg`). Los originales de cámara (`assets/img/First/`, `assets/img/Probot-Fútbol/`, `assets/img/cubing/`) están ignorados por Git: no se publican y pueden incluir HEIC o video. Solo se versionan los archivos optimizados.
+Las imágenes principales de las tarjetas siguen en `assets/img/` (`first-robot.jpg`, `probot-robot.jpg`, `cubing.jpg`). Los originales de cámara (`assets/img/First/`, `assets/img/Probot-Fútbol/`, `assets/img/copa-robotica/`, `assets/img/cubing/`) están ignorados por Git: no se publican y pueden incluir HEIC o video. Solo se versionan los archivos optimizados.
 
 Las rutas de las tres imágenes principales también están centralizadas en `CONFIG.images`, así que podés apuntarlas a otro archivo sin tocar el HTML.
 
